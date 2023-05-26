@@ -1,11 +1,25 @@
 `timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer:  
+// Create Date: 14.05.2023 19:12:15
+// Design Name: 
+// Module Name: sdfdf
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// Dependencies: 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+//////////////////////////////////////////////////////////////////////////////////
 
 module test(
  input button1,
  input button2, 
  input  button3,
  input button4,
-
  input clk, 
  input button,
  output reg [6:0] led_out,
@@ -25,7 +39,37 @@ module test(
   reg  xnew=0;
  reg buttonnew;
  integer count = 0;
- integer delay = 650000; # // 6.5ms delay
+ integer delay = 650000; // 6.5ms delay
+
+
+// reading outputed data from cou
+ reg [31:0] instr_mem [31:0]; 	// instruction array
+
+integer i ;
+
+        
+    initial
+    begin
+        
+        $readmemb("output.mem", instr_mem);
+    end
+    
+   
+
+    initial
+    begin
+    
+       
+        for(i=0;i<32;i++)
+        $display (instr_mem[i]);  
+        
+        
+    end
+
+    // endo of reading part
+
+
+
 initial begin
       seg_display[0] = 7'b1000000;
       seg_display[1] = 7'b1111001;
@@ -50,26 +94,17 @@ end
     end
   end
 
-  always @(posedge buttonnew) begin
+always @(posedge buttonnew) begin
     //if (posedge buttonnew) begin
-      if (x == 0) begin
-        outnum <= 9625;
+      if (x <= 31) begin
+       outnum <= instr_mem[x];
         x <= x + 1;
-      end else if (x == 1) begin
-        outnum <= 9224;
-        x <= x + 1;
-      end else if (x == 2) begin
-        outnum <= 9756;
-        x <= x + 1;
-      end else if (x == 3) begin
-        outnum <= 9186;
-        //x <= x + 1;
+      end 
+      else begin
         x<=0;
-     /* end else if (x == 4) begin
-        outnum <= 9625;
-        x <= 0;*/
+        outnum <= instr_mem[x];
       end
-    //end
+      
   end
 
 
