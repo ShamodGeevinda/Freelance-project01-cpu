@@ -4,7 +4,7 @@ module Alu (ZERO, RESULT, DATA1, DATA2, SELECT);
 input [31:0] DATA1, DATA2;
 input [2:0] SELECT;
 output reg [31:0] RESULT;
-output  ZERO;
+output reg ZERO;
 
 
 
@@ -21,9 +21,14 @@ Or or1(OR_OUT, DATA1, DATA2 );
 
 
 
+always @(*) begin
+    if((DATA1-DATA2) ==0)
+    ZERO =1;
+    else
+    ZERO = 0;
+end
 
-
-assign ZERO = ~(|RESULT);
+// assign ZERO = ~(|RESULT);
 
 
 always @(*) begin //always @(*) begin
@@ -64,14 +69,14 @@ endmodule
 module Add (ADD_OUT, DATA1, DATA2);
     input [31:0] DATA1, DATA2;
     output [31:0] ADD_OUT;
-    assign #2  ADD_OUT =  DATA1-DATA2; 
+    assign #2  ADD_OUT =  DATA1+DATA2; 
     
 endmodule
 
 module Sub (ADD_OUT, DATA1, DATA2);
     input [31:0] DATA1, DATA2;
     output [31:0] ADD_OUT;
-    assign #2  ADD_OUT =  DATA1+DATA2; 
+    assign #2  ADD_OUT =  DATA1-DATA2; 
     
 endmodule
 

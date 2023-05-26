@@ -33,7 +33,7 @@ module cpu (PC, INSTRUCTION, CLK, RESET );
 
     andgate a1(AND_OUT, BRAZ, ZERO);
     andgate a2(AND_OUT2, BRANZ, ~ZERO);
-    or or1(OR_OUT,AND_OUT, AND_OUT2, BRAUNCOND);
+    orgate or1(OR_OUT,AND_OUT, AND_OUT2, BRAUNCOND);
  
     mux32 jump_mux (NEXTPC2 ,NEXTPC, SIGN_EXTENDED_IMM,OR_OUT);
 
@@ -72,8 +72,8 @@ module andgate (OUTPUT, INPUT1, INPUT2);
 endmodule
 
 // OR GATE
-module orgate (OUTPUT, INPUT1, INPUT2);
-    input INPUT1, INPUT2;
+module orgate (OUTPUT, INPUT1, INPUT2, INPUT3);
+    input INPUT1, INPUT2, INPUT3;
     output OUTPUT;
-    assign OUTPUT = INPUT1 | INPUT2;
+    assign OUTPUT = INPUT1 | INPUT2 | INPUT3;
 endmodule

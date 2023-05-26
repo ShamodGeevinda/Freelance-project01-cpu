@@ -89,7 +89,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
             end 
 
             'b1001: begin // Branz
-                MUXIMM = 'bx ;
+                MUXIMM = 'b0 ;
                 ALUOP = 3'bxxx;
                 WRITEENABLE = 'bx;
                 BRAZ = 'b0;
@@ -98,7 +98,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
             end 
 
             'b1010: begin // Braz
-                MUXIMM = 'bx ;
+                MUXIMM = 'b0 ;
                 ALUOP = 3'bxxx;
                 WRITEENABLE = 'bx;
                 BRAZ = 'b1;
