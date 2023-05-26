@@ -11,7 +11,7 @@ module reg_file(IN, OUT1, OUT2, INADDRESS, OUT1ADDRESS, OUT2ADDRESS, WRITE, CLK,
 
 	integer regNum ;			// represet the register number for the RESET task
        
- integer i;  
+ integer i,f;  
 	// assign given addresses values to OUT1 and OUT2 respectively. this is asynchronous therefore, we use blocking statement with delay 2 units
 	assign #2 OUT1 = registers[OUT1ADDRESS];	
 	assign #2 OUT2 = registers[OUT2ADDRESS];
@@ -52,7 +52,24 @@ module reg_file(IN, OUT1, OUT2, INADDRESS, OUT1ADDRESS, OUT2ADDRESS, WRITE, CLK,
         $dumpfile("cpu_wavedata.vcd");
         for(i=0;i<32;i++)
             $dumpvars(1,registers[i]);
-    end    
+    end   
+
+
+	initial begin
+		#200
+  		f = $fopen("output.mem","w");
+	end
+
+	initial begin
+		#210
+  		for (i = 0; i<32; i=i+1)
+    	$fwrite(f,"%b\n",registers[i]);
+	end
+
+	initial begin
+		#215
+  		$fclose(f);  
+	end
 
 endmodule	
 
