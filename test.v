@@ -27,7 +27,7 @@ module test(
 );
 
   ///reg [3:0] digit_select = 4'b0000; // Initial digit selection
-  reg [15:0]outnum=0000; 
+  reg [31:0]outnum=0000; 
   reg [25:0] count_25ms;
   reg [3:0] seg_a;
   reg [3:0] seg_b;
@@ -35,35 +35,72 @@ module test(
   reg [3:0] seg_d;
   reg [1:0] level; 
   reg [6:0] seg_display [0:9];
-  reg[1:0]x;
+  reg[4:0]x =0;
   reg  xnew=0;
  reg buttonnew;
  integer count = 0;
  integer delay = 650000; // 6.5ms delay
 
 
-// reading outputed data from cou
- reg [31:0] instr_mem [31:0]; 	// instruction array
+// reading outputed data from cpu
+ reg [31:0] instr_mem [0:31]; 	// instruction array
 
 integer i ;
 
         
-    initial
-    begin
+    // initial
+    // begin
         
-        $readmemb("output.mem", instr_mem);
-    end
+    //     $readmemb("output.mem", instr_mem);
+    // end
     
    
 
-    initial
-    begin
+    // initial
+    // begin
     
-       
-        for(i=0;i<32;i++)
-        $display (instr_mem[i]);  
+    //    #5
+    //     for(i=0;i<32;i++)
+    //     $display (instr_mem[i]);  
         
         
+    // end
+
+    initial begin
+        {instr_mem[          0]}= 32'b00000000000000000000000000000000;
+        {instr_mem[          1]}= 32'b00000000000000000000000000000001;
+        {instr_mem[          2]}= 32'b00000000000000000000000000000010;
+        {instr_mem[          3]}= 32'b00000000000000000000000000000010;
+        {instr_mem[          4]}= 32'b00000000000000000000000000000011;
+        {instr_mem[          5]}= 32'b00000000000000000000000000001000;
+        {instr_mem[          6]}= 32'b00000000000000000000000000000001;
+        {instr_mem[          7]}= 32'b00000000000000000000000000000000;
+        {instr_mem[          8]}= 32'b00000000000000000000000000000101;
+        {instr_mem[          9]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         10]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         11]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         12]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         13]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         14]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         15]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         16]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         17]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         18]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         19]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         20]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         21]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         22]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         23]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         24]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         25]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         26]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         27]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         28]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         29]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         30]}= 32'b00000000000000000000000000000000;
+        {instr_mem[         31]}= 32'b00000000000000000000000000000000;
+
+     
     end
 
     // endo of reading part
@@ -102,7 +139,7 @@ always @(posedge buttonnew) begin
       end 
       else begin
         x<=0;
-        outnum <= instr_mem[x];
+       // outnum <= instr_mem[x];
       end
       
   end

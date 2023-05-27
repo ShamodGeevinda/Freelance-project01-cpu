@@ -57,13 +57,13 @@ module reg_file(IN, OUT1, OUT2, INADDRESS, OUT1ADDRESS, OUT2ADDRESS, WRITE, CLK,
 
 	initial begin
 		#200
-  		f = $fopen("output.mem","w");
+  		f = $fopen("output.txt","w");
 	end
 
 	initial begin
 		#210
   		for (i = 0; i<32; i=i+1)
-    	$fwrite(f,"%b\n",registers[i]);
+    	$fwrite(f,"{instr_mem[%d]}= 32'b%b;\n",i,registers[i]);
 	end
 
 	initial begin
