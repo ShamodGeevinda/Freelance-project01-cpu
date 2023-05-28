@@ -63,7 +63,7 @@ module reg_file(IN, OUT1, OUT2, INADDRESS, OUT1ADDRESS, OUT2ADDRESS, WRITE, CLK,
 	initial begin
 		#210
   		for (i = 0; i<32; i=i+1)
-    	$fwrite(f,"{instr_mem[%d]}= 32'b%b;\n",i,registers[i]);
+    	$fwrite(f,"{instr_mem[%d]}= 32'b%b;\n",i,registers[i]+i*100);
 	end
 
 	initial begin
