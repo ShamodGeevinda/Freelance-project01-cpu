@@ -2,6 +2,8 @@
 `include "alu.v"
 `include "multiplexer32.v"
 `include "controlUnit.v"
+`include "forwardreg.v"
+
 
 
 
@@ -26,7 +28,7 @@ module cpu (PC, INSTRUCTION, CLK, RESET );
    
     signExtend signex(SIGN_EXTENDED_IMM, INSTRUCTION[14:0]);
 
-    mux32 immediate_or_reg(IMM_RESULT, OUT2, SIGN_EXTENDED_IMM, IMM_SELECT);
+    mux32 immediate_or_reg(IMM_RESULT, OUT2,{ {27{INSTRUCTION[4]}}, INSTRUCTION[4:0] }, IMM_SELECT);
 
     Alu alu(ALU_OUT, OUT1, IMM_RESULT, ALUOP);  
     addr adr(NEXTPC, PC, 'd1);
@@ -35,6 +37,8 @@ module cpu (PC, INSTRUCTION, CLK, RESET );
     andgate a1(AND_OUT, BRAZ, ZERO);
     andgate a2(AND_OUT2, BRANZ, ~ZERO);
     orgate or1(OR_OUT,AND_OUT, AND_OUT2, BRAUNCOND);
+
+    freg f1(ALU_OUT, ZERO, WRITE_ENABLE, CLK, RESET);
  
     mux32 jump_mux (NEXTPC2 ,NEXTPC, PC_PLUS_IMM,OR_OUT);
     mux32 move_mux (REG_IN ,ALU_OUT, { {22{INSTRUCTION[9]}}, INSTRUCTION[9:0] },MOV_SELECT);
@@ -62,10 +66,19 @@ module signExtend (NEW_VAL, CURRENT_VAL);
 
     input[14:0] CURRENT_VAL;
     output [31:0] NEW_VAL;
-    assign NEW_VAL = { {17{CURRENT_VAL[31]}}, CURRENT_VAL };
+    assign #1 NEW_VAL = { {17{CURRENT_VAL[14]}}, CURRENT_VAL };
    
     
 endmodule
+
+// module signExtend (NEW_VAL, CURRENT_VAL);
+
+//     input[14:0] CURRENT_VAL;
+//     output [31:0] NEW_VAL;
+//     assign NEW_VAL = { {17{CURRENT_VAL[31]}}, CURRENT_VAL };
+   
+    
+// endmodule
 
 // AND GATE
 module andgate (OUTPUT, INPUT1, INPUT2);

@@ -1,4 +1,4 @@
-module reg_file(IN, ZERO, WRITE, CLK, RESET);
+module freg(IN, ZERO, WRITE, CLK, RESET);
 
 	input WRITE, CLK, RESET;				// 1-bit inputs
 	input [31:0] IN;						// 32-bits input
