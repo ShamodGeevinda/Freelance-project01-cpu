@@ -1,6 +1,6 @@
-module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
+module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE, MOV_SELECT);
     input [3:0] OPCODE;
-    output reg WRITEENABLE, MUXIMM, BRAZ,BRANZ,BRAUNCOND;
+    output reg WRITEENABLE, MUXIMM, BRAZ,BRANZ,BRAUNCOND, MOV_SELECT;
     output reg [2:0] ALUOP;
 
     always @(*) begin
@@ -14,6 +14,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b0;
                 BRANZ = 'b0;
                 BRAUNCOND = 'b0;
+                MOV_SELECT = 'b0;
             end 
 
             'b0001: begin // addi
@@ -23,6 +24,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b0;
                 BRANZ = 'b0;
                 BRAUNCOND = 'b0;
+                 MOV_SELECT = 'b0;
             end
 
             'b0010: begin // sub
@@ -32,6 +34,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b0;
                 BRANZ = 'b0;
                 BRAUNCOND = 'b0;
+                 MOV_SELECT = 'b0;
             end 
 
             'b0011: begin // subi
@@ -41,6 +44,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b0;
                 BRANZ = 'b0;
                 BRAUNCOND = 'b0;
+                 MOV_SELECT = 'b0;
             end 
 
              'b0100: begin // and
@@ -50,6 +54,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b0;
                 BRANZ = 'b0;
                 BRAUNCOND = 'b0;
+                 MOV_SELECT = 'b0;
             end 
 
             'b0101: begin // andi
@@ -59,6 +64,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b0;
                 BRANZ = 'b0;
                 BRAUNCOND = 'b0;
+                 MOV_SELECT = 'b0;
             end  
 
             'b0110: begin // or
@@ -68,6 +74,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b0;
                 BRANZ = 'b0;
                 BRAUNCOND = 'b0;
+                 MOV_SELECT = 'b0;
             end 
 
             'b0111: begin // ori
@@ -77,6 +84,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b0;
                 BRANZ = 'b0;
                 BRAUNCOND = 'b0;
+                 MOV_SELECT = 'b0;
             end   
 
             'b1000: begin // mov
@@ -86,6 +94,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b0;
                 BRANZ = 'b0;
                 BRAUNCOND = 'b0;
+                 MOV_SELECT = 'b1;
             end 
 
             'b1001: begin // Branz
@@ -95,6 +104,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b0;
                 BRANZ = 'b1;
                 BRAUNCOND = 'b0;
+                 MOV_SELECT = 'b0;
             end 
 
             'b1010: begin // Braz
@@ -104,6 +114,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b1;
                 BRANZ = 'b0;
                 BRAUNCOND = 'b0;
+                 MOV_SELECT = 'b0;
             end      
     
             'b1011: begin // Brauncod
@@ -113,6 +124,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'b0;
                 BRANZ = 'b0;
                 BRAUNCOND = 'b1;
+                 MOV_SELECT = 'b0;
             end 
 
             default: begin 
@@ -122,6 +134,7 @@ module   controlUnit(ALUOP, WRITEENABLE, MUXIMM,BRAZ,BRANZ,BRAUNCOND, OPCODE);
                 BRAZ = 'bx;
                 BRANZ = 'bx;
                 BRAUNCOND = 'bx;
+                 MOV_SELECT = 'bx;
             end              
 
 

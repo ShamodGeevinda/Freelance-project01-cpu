@@ -1,10 +1,10 @@
-module Alu (ZERO, RESULT, DATA1, DATA2, SELECT);
+module Alu ( RESULT, DATA1, DATA2, SELECT);
 
 // port declaration
 input [31:0] DATA1, DATA2;
 input [2:0] SELECT;
 output reg [31:0] RESULT;
-output reg ZERO;
+
 
 
 
@@ -21,12 +21,7 @@ Or or1(OR_OUT, DATA1, DATA2 );
 
 
 
-always @(*) begin
-    if((DATA1-DATA2) ==0)
-    ZERO =1;
-    else
-    ZERO = 0;
-end
+
 
 // assign ZERO = ~(|RESULT);
 
